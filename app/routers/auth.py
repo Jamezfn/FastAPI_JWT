@@ -4,7 +4,7 @@ from schemas.auth import UserCreate
 from fastapi import Depends
 
 from db_utils.dB import get_db
-from db_utils.user import create
+from db_utils.user import create, get
 
 router = APIRouter(
     prefix='/auth',
@@ -20,10 +20,9 @@ def index():
 def register(request: UserCreate, db: Session = Depends(get_db)):
     return create(request, db)
 
-@router.get('/login')
-def login():
-    return Response(status_code=status.HTTP_200_OK, content="Login endpoint")
-
+@router.post('/login')
+def login(request: UserCreate, db: Session = Depends(get_db)):
+    return get(request, db)
 
 @router.get('/logout')
 def logout():

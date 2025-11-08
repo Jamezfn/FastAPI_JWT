@@ -4,4 +4,5 @@ PyJWT
 passlib
 SQLAlchemy
 pydantic
-passlib
+argon2-cffi
+pydantic_settings
