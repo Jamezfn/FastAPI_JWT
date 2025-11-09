@@ -6,3 +6,4 @@ SQLAlchemy
 pydantic
 argon2-cffi
 pydantic_settings
+python-multipart

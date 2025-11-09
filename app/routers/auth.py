@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Response, status
 from sqlalchemy.orm import Session
-from schemas.auth import UserCreate
+from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends
 
+from schemas.auth import UserCreate
 from db_utils.dB import get_db
 from db_utils.user import create, get
 

@@ -2,7 +2,7 @@ import os
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    JWT_SECRET: str = os.getenv("JWT_SECRET", "mysecretkey")
+    SECRET: str = os.getenv("JWT_SECRET", "mysecretkey")
     ALGORITHM: str = "HS256"
     ACCESS_EXPIRE_MINUTES: int = 15
     REFRESH_EXPIRE_DAYS: int = 7
