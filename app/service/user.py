@@ -23,10 +23,17 @@ class UserService:
         if not self.__userRepository.user_exist_by_email(email=loginDetails.email):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please create an account")
         
-        user = self.__userRepository.get_user_by_email(email=loginDetails.password)
+        user = self.__userRepository.get_user_by_email(email=loginDetails.email)
         if HashHelper.verify_password(plain_password=loginDetails.password, hashed_password=user.password):
             token = AuthHandler.sign_jwt(user_id=user.id)
             if token:
                 return UserWithToken(token=token)
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unable to process request")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Please check your credentials")
+    
+    def get_user_by_id(self, user_id: int):
+        user = self.__userRepository.get_user_by_id(id=user_id)
+        if user:
+            return user
+        
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User is not available")
